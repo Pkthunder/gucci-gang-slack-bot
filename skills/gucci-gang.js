@@ -19,25 +19,31 @@ var repeat = function (str, times) {
     return s.join(' ');
 };
 
+var GG_ITERATIONS = 7;      // not 8? Why would it be musical?
+
 module.exports = function(controller) {
 
     controller.hears(hearsRegex, triggers, function (bot, message) {
-        if (message.match.length >= 8) {
-            bot.reply(message, 'My bitch love do cocaine!');
+        var reply = '';
+
+        if (message.match.length >= GG_ITERATIONS) {
+           reply = 'My bitch love do cocaine!';
         }
-	else if (message.match.length === 1) {
-            bot.reply(message, repeat(message.match[0], 8) + ' :guccigang:');
+        else if (message.match.length === 1) {
+            reply = repeat(message.match[0], GG_ITERATIONS);
         }
         else {
-            bot.reply(message, '... ' + 
-		repeat(message.match[0], 8 - message.match.length) + 
-		' :guccigang:' );
+            reply = '... ' + repeat(message.match[0], GG_ITERATIONS - message.match.length);
         }
+
+        reply += ' :guccigang:';
+
+        bot.reply(message, reply);
 
     });
 
     controller.hears(['^lyrics'], triggers.slice(0, 2), function (bot, message) {
-	bot.reply(message, `https://genius.com/Lil-pump-gucci-gang-lyrics`);
+	   bot.reply(message, `https://genius.com/Lil-pump-gucci-gang-lyrics`);
     });
 
     controller.hears(['^echo (.*)'], triggers, function (bot, message) {
