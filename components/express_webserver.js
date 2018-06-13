@@ -26,14 +26,6 @@ module.exports = function(controller) {
 
     webserver.use(express.static('public'));
 
-    var server = http.createServer(webserver);
-
-    server.listen(process.env.PORT || 3000, null, function() {
-
-        console.log('Express webserver configured and listening at http://localhost:' + process.env.PORT || 3000);
-
-    });
-
     // import all the pre-defined routes that are present in /components/routes
     var normalizedPath = require("path").join(__dirname, "routes");
     require("fs").readdirSync(normalizedPath).forEach(function(file) {
@@ -41,7 +33,6 @@ module.exports = function(controller) {
     });
 
     controller.webserver = webserver;
-    controller.httpserver = server;
 
     return webserver;
 

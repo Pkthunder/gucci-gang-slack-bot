@@ -1,7 +1,12 @@
 .db
+.data
 .env
 node_modules
 components/routes/_*
 .sass-cache/*
 .data/*
 !.data/.gitkeep
+serverless.yml
+.serverless
+
+
